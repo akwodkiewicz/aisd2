@@ -1,0 +1,37 @@
+
+Uzupe³niæ metody
+
+static bool FindCycle(this Graph g, out Edge[] cycle)
+static bool TreeCenter(this Graph g, out int[] center)
+
+Rozwi¹zuj¹ce problemy
+- wyszukiwania cyklu w grafie
+- wyznaczania centrum drzewa
+
+Opis parametrów i wyniklu znajduje siê w pliku Lab03.cs
+
+Punktacja (³¹cznie 4 pkt)
+
+FindCycle  -  ³¹cznie 2 pkt
+w tym
+- grafy skierowane - 1 pkt.
+  0.5 - za prawid³ow¹ wartoœæ zwracan¹ funkcji
+  0.5 - za parametr cycle 
+- grafy nieskierowane - 1 pkt.
+  0.5 - za prawid³ow¹ wartoœæ zwracan¹ funkcji
+  0.5 - za parametr cycle 
+
+TreeCenter  -  ³¹cznie 2 pkt
+w tym
+  0.5 - za rozpoznanie poprawnoœci danych (graf nieskierowany, drzewo)
+  1.5 - za pozosta³¹ czêœæ
+
+Centrum drzewa to "œrodkowe" wierzcho³ki najd³u¿szej œcie¿ki w tym drzewie.
+Mo¿e to byæ 1 wierzcho³ek lub 2 wierzcho³ki.
+Ale w celu wyznaczenia centrum wcale nie trzeba jawnie szukaæ najd³u¿szej œcie¿ki.
+
+Do wyznaczania centrum drzewa mo¿na wykorzystaæ nastepuj¹cy algorytm
+1) wyznaczyæ liœcie drzewa
+2) usun¹æ liœcie
+3) kroki 1 i 2 powtarzaæ tak d³ugo jak potrzeba
+To oczywiœcie tylko idea - przypominam - nie wolno niszczyæ grafu.

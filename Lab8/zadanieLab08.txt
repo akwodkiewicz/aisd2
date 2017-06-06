@@ -1,0 +1,93 @@
+
+UWAGI OGÓLNE
+1) pliki *.dat należy wgrać do katalogu w którym będzie utworzony plik wykonywalny
+2) zadanie nie ma cześci domowej, ale będzie poddane kontroli antyplagiatowej.
+   Pliki z rozwiązaniami z zajęć należy wysłać do wtorku 11.04.2017 do godz. 23.59.
+
+Celem zadania jest zaimplementowanie kilku przybliżonych algorytmów kolorowania wierzchołkowego grafu.
+Wierzchołkowe kolorowanie grafu polega na przypisaniu takich liczb naturalnych (w naszym przypadku bez zera,
+patrz uwagi techniczne) do wierzchołków grafu, aby dwa wierzchołki połączone krawędzią nie miały przypisanej
+tej samej liczby (koloru).
+
+Uwaga wstępna
+Duża część algorytmów, choć nie wszystkie, polegają w ogólnym zamyśle na ustaleniu
+pewnego porządku wierzchołków. Gdy już taki porządek jest ustalony, to algorytm kolorowania
+dla zadanego porządku jest następujący:
+dla każdego wierzchołka w porządku przypisz mu najmniejszy możliwy kolor
+(czyli taki, który nie spowoduje konfliktu z sąsiednimi wierzchołkami, które są już pokolorowane).
+
+Oto heurystyki, które należy zaimplementować:
+
+0. Greedy Coloring (0.5p)
+
+Tak naprawdę to nie jest heurystyka. Jest to metoda, która może się okazać przydatna w przypadku innych
+heurystyk. Dla zadanego porządku wierzołków w tablicy order (najpierw przetwarzamy wierzchołek pod order[0],
+potem pod order[1] itd.), każdemu wierzchołkowi przypisz najmniejszy możliwy kolor
+(czyli taki, który nie spowoduje konfliktu z sąsiednimi wierzchołkami, które są już pokolorowane).
+W przypadku, gdy order==null, użyj pierwotnej numeracji wierzchołków w grafie (0,1,2,3...).
+
+1. BFS (0.5p)
+Przeszukaj graf metodą BFS. Przeszukanie grafu ustali nam pewien porządek wierzchołków
+(taki, w jakiej kolejności je odwiedzaliśmy). Pokoloruj graf zgodnie z tym porządkiem.
+
+2. Largest Back Degree (1p)
+Wprowadźmy pojęcie back degree, czyli stopnia wstecznego.
+Rozważmy wierzchołek o numerze v.
+Stopień wsteczny wierzchołka v to liczba sąsiadów v o numerach mniejszch niż v.
+W tej metodzie wyznaczamy porządek wierzchołków poprzez posortowanie wierzchołków po ich stopniu wstecznym,
+od największego do najmniejszego (w przypadku równych stopni wstecznych jako kryterium dodatkowe wykorzystujemy
+pierwotną numerację wierzchołków od najmniejszego do najwiekszego)
+
+3. Color Degree Ordering (1p)
+Zdefiniujmy kolorowy stopień wierzchołka jako liczbę już pokolorowanych sąsiadów
+(czyli wierzchołek, który ma 100 sąsiadów niepokolorowanych i trzech sąsiadów pokolorowanych ma
+kolorowy stopień wierzchołka 3). W każdej iteracji algorytmu wybieramy taki niepokolorowany wierzchołkek,
+który ma największy kolorowy stopień i kolorujemy go najmniejszym możliwym kolorem.
+W przypadku dwóch wierzchołków o równym kolorowym stopniu, wybieramy ten o mniejszym numerze.
+
+4. Incremental (1p)
+W każdej iteracji algorytmu należy wybrać zachłannie maksymalny (pod względem inkluzji) zbiór wierzchołków,
+które można pokolorować jednym kolorem (w pierwszej iteracji będziemy kolorować pierwszym kolorem,
+w drugiej drugim itd.).
+Aby mieć pewność jednoznaczności wyboru takiego zbioru, narzućmy dodatkowe ograniczenie:
+taki zbiór, patrząc na indeksy wierzchołków, ma być najmniejszy leksykograficznie.
+I tak np. zbiór (przy czym w tym wypadku kolejność indeksów wierzchołków ma znaczenie)
+(0,1,4,6) jest mniejszy od (0,1,5,6). (porządek leksykograficzny to innymi słowy alfabetyczny).
+Innymi słowy, należy starać się zbudować nasz zbiór począwszy od najmniejszych indeksów wierzchołków.
+
+Uwagi techniczne:
+=================
+
+0. Grafy są zawsze nieskierowane. Grafy nie muszą być spójne (choć większość jest).
+
+1. Kolory liczymy od JEDYNKI. Kolor zero to brak koloru. W ostatecznym rozwiązaniu nie powinno się znaleźć żadne zero
+   (niepokolorowany wierzchołek).
+
+2. Należy zwrócić tablicę, w której pod i-tym indeksem znajduje się kolor i-tego wierzchołka.
+
+3. Każdy graf da się pokolorować taką liczbą kolorów, jaka jest liczba wierzchołków.
+   Dlatego rozwiązania, które zawierają kolory spoza przedziału [1, |V(G)|] będą odrzucane.
+
+4. Kod testujący sprawdza ilu kolorów użyto poprzez znalezienie maksymalnego koloru w tablicy.
+
+5. Grafu wejściowego nie należy w żaden sposób modyfikować.
+
+Testy i komunikaty w testach (w kolejności sprawdzania):
+========================================================
+
+1. Graph was changed - graf wejściowy został zmieniony
+
+2. Graph is not colored at all (result is null) - zwrócona tablica to null
+
+3. Vertex {0} is not colored (value in array is 0) - wierzchołek ma przypisany kolor zerowy (brak koloru)
+
+4. Vertex {0} is colored with invalid color - kolor jest spoza zakresu [1, |V(G)|]
+
+5. Coloring in invalid (some color(s) is not used). - Błąd pojawia się w sytuacji, gdy użyto np. kolorów 1, 2, 5
+   i mamy "dziurę". A więc liczba kolorów zużyta przez algorytm wychodzi 5 (bo to maksimum), a tak naprawdę użyto 3 kolorów.
+
+6. Conflict on edge ({0},{1}). - na danej krawędzi oba wierzchołki mają przypisany ten sam kolor
+
+7. incorrect color count: {0} (expected: {1}) - nie zgadza się liczba kolorów użyta przez algorytm
+
+8. incorrect graph coloring on index {0}: {1} (expected: {2}) - kolor na konkretnym wierzchołku się nie zgadza

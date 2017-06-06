@@ -1,0 +1,57 @@
+Grupa turystów stoi w nocy na brzegu rzeki. Maj¹ przed sob¹ stary, zniszczony most. 
+Most mo¿e jednoczeœnie utrzymaæ ciê¿ar tylko dwóch osób. Jako ¿e jest ciemno, most mo¿na przejœæ tylko z latark¹. 
+Niestety nasi bohaterowie posiadaj¹ tylko jedn¹ latarkê. Turyœci nie mog¹ przechodziæ przez most bez latarki, 
+ani w wiêkszych ni¿ dwuosobowe grupach. Ka¿da z osób pokonuje most w okreœlonym tempie. Dwóch turystów id¹cych 
+razem potrzebuje na przejœcie przez most tyle czasu, co wolniejszy z nich. Napisz program, który przy pomocy 
+techniki backtracking sprawdzi, jaki jest najkrótszy czas, w którym wszyscy turyœci mog¹ znaleŸæ siê pod drugiej 
+stronie rzeki i zwróci strategiê w jaki sposób mog¹ tego dokonaæ. 
+
+Przyk³ad
+Mamy 4 turystów ponumerowanych 0, 1, 2 i 3. Turysta 0 mo¿e pokonaæ most w ci¹gu 1 minuty, 
+turysta 1 w ci¹gu 2 minut, 2 w ci¹gu 5 minut, a 3 w ci¹gu 10 minut.
+
+Przyk³adowe rozwi¹zanie (nieoptymalne!), w którym najszybszy turysta "przeprowadza przez most"
+kolejno wszystkich pozosta³ych:
+przechodz¹ turyœci 0 i 1 - czas przejœcia: 2 minuty
+wraca turysta 0 - czas przejœcia: 1 minuta
+przechodz¹ turyœci 0 i 2 - czas przejœcia: 5 minut
+wraca turysta 0 - czas przejœcia: 1 minuta
+przechodz¹ turyœci 0 i 3 - czas przejœcia: 10 minut
+Wynik: 19 minut
+
+Powy¿sze rozwi¹zanie nie jest optymalne. Najkrótszy mo¿liwy czas przejœcia przez most wszystkich
+turystów w tym przypadku to 17 minut. 
+Mo¿na to zrealizowaæ w nastêpuj¹cy sposób:
+przechodz¹ turyœci 0 i 1 - czas przejœcia: 2 minuty
+wraca turysta 0 - czas przejœcia: 1 minuta
+przechodz¹ turyœci 2 i 3 - czas przejœcia: 10 minut
+wraca turysta 1 - czas przejœcia: 2 minuty
+przechodz¹ turyœci 0 i 1 - czas przejœcia: 2 minuty
+
+W wyniku dzia³ania metoda CrossBridge powinna zwróciæ 17, natomiast parametr wyjœciowy strategy mo¿e byæ 
+nastêpuj¹c¹ list¹ piêciu list: ((0,1), (0), (2,3), (1), (0,1)) lub dowoln¹ inn¹ realizuj¹c¹ prawid³ow¹ strategiê, 
+w wyniku zastosowania której otrzymany wynik bêdzie optymalny.
+
+Zadanie nale¿y rozwi¹zaæ algorytmem z powrotami (ang. backtracking) poprzez symulacjê przechodzenia 
+(w obie strony) turystów przez rzekê. Nale¿y odpowiednio "ucinaæ" czêœciowe rozwi¹zania, które nie daj¹ szans 
+na poprawienie wyniku.
+
+Punktacja:
+2 punkty - zwracanie prawid³owego najkrótszego mo¿liwego czasu przejœcia przez most
+2 punkty - zwracanie prawid³owej strategii realizuj¹cej najkrótszy czas przejœcia przez most
+-1 punkt - brak "ucinania" czêœciowych rozwi¹zañ w przypadku, gdy dalsze obliczenia nie maj¹ szans na poprawienie wyniku
+Uwaga 1: testy "zajêciowe" powinny liczyæ siê "natychmiast",
+         zauwa¿alne opóŸnienia równie¿ mog¹ skutkowaæ zmniejszeniem punktacji.
+Uwaga 2: za przygotowanie na zajêciach (do godz. 13.45) rozwi¹zania które przechodzi opisane dalej 
+         przyk³adowe "testy domowe" mo¿na dostaæ dodatkowy bonusowy punkt.
+
+Uwagi do testów domowych
+1) Aby algorytm dosta³ maksymaln¹ liczbê punktów z testów domowych potrzebna jest optymalizacja algorytmu.
+Wskazówka: w optymalnym rozwi¹zaniu wybór osoby, która wraca z latark¹ jest jednoznaczny (nie trzeba 
+sprawdzaæ wszystkich mo¿liwych osób)
+2) Dwa dodatkowe przypadki testowe zbli¿one do tych jakie bêd¹ w testach domowych mo¿na uruchomiæ
+zmieniaj¹c wartoœæ zmiennej isExtraTests na true.
+3) Program skompilowany jako release dzia³a szybciej.
+
+
+

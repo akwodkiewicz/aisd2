@@ -1,0 +1,64 @@
+
+Wiadomo, jak w grafie z wagami na krawêdziach znaleŸæ najkrótsz¹ œcie¿kê miêdzy wskazanymi wierzcho³kami.
+Jeœli wszystkie wagi w grafie s¹ nieujemne, mo¿emy u¿yæ np. algorytmu Dijkstry.
+Algorytm dzia³a zarówno dla grafów skierowanych i nieskierowanych.
+
+Na zajêciach rozpatrzymy inny, choæ podobny problem. Naszym celem jest znalezienie *drugiej*
+pod wzglêdem d³ugoœci œcie¿ki miêdzy wskazanymi wierzcho³kami. Znowu chcemy znaleŸæ algorytm dzia³aj¹cy
+zarówno dla grafów skierowanych i nieskierowanych.
+
+Zwróæmy uwagê, ¿e mo¿e siê zdarzyæ, ¿e:
+a) druga najkrótsza œcie¿ka nie istnieje (nawet jeœli najkrótsza œcie¿ka istnieje), np. jeœli graf jest
+skierowan¹ œcie¿k¹ 0 -> 1 -> 2, istnieje tylko jedna œcie¿ka od 0 do 2.
+b) druga najkrótsza œcie¿ka ma tak¹ sam¹ d³ugoœæ jak najkrótsza, np. jeœli graf jest cyklem nieskierowanym 0,1,2,3
+o jednakowych wagach wszystkich krawêdzi i szukamy œcie¿ek od 1 do 3.
+
+UWAGA: mo¿na za³o¿yæ, ¿e:
+- graf nie ma pêtli, tj. krawêdzi od wierzcho³ka do niego samego
+- wierzcho³ek pocz¹tkowy jest ró¿ny od wierzcho³ka koñcowego
+- graf nie ma krawêdzi o ujemnych wagach
+
+Problem mo¿na rozwa¿aæ w dwóch wariantach:
+
+1. Na œcie¿ce dopuszczamy powtórzenia wierzcho³ków i krawêdzi (zauwa¿, ¿e taka sytuacja nigdy
+nie bêdzie mia³a miejsca w przypadku szukania *najkrótszej œcie¿ki*).
+Przy liczeniu d³ugoœci œcie¿ki liczy siê jednak pierwszy moment osi¹gniêcia wierzcho³ka koñcowego.
+Innymi s³owy, wymagamy, aby wierzcho³ek koñcowy wystêpowa³ na œcie¿ce tylko raz, na koñcu
+(czyli nie mo¿na dojœæ z a do b najkrótsz¹ œcie¿k¹, a potem pochodziæ po okolicy).
+
+2. Znaleziona œcie¿ka musi byæ prosta, tj. nie zawieraæ powtórzeñ wierzcho³ków.
+
+Ka¿dy wariant jest za 2 punkty.
+
+Uwagi i podpowiedzi:
+
+Wariant 1.
+Niech P1 bêdzie najkrótsz¹ œcie¿k¹ od a do b, a P2 bêdzie szukan¹ drug¹ œcie¿k¹.
+Zauwa¿, ¿e P2 musi jakoœ ró¿niæ siê od P1, czyli id¹c wzd³u¿ P1 na którymœ wierzcho³ku (byæ mo¿e ju¿ na pierwszym)
+musimy wybraæ inn¹ krawêdŸ ni¿ wybraliœmy w P1.
+
+Wymagana z³o¿onoœæ obliczeniowa to O(D), gdzie D jest z³o¿onoœci¹ implementacji algorytmu Dijkstry z biblioteki Graph.
+
+Wariant 2.
+W tym wariancie równie¿ gdzieœ musimy dokonaæ innego wyboru ni¿ na œcie¿ce P1. Musimy jednak uwa¿aæ,
+aby nie wejœæ na "wspólny prefiks" œcie¿ek P1 i P2.
+
+Wymagana z³o¿onoœæ obliczeniowa to O(n*D), gdzie D jest z³o¿onoœci¹ implementacji algorytmu Dijkstry z biblioteki Graph.
+
+Uwagi techniczne.
+
+1) Przypominamy, ¿e gdy odpowiednia krawêdŸ/œcie¿ka nie istnieje, to jej waga jest równa NaN,
+co mo¿na sprawdziæ przy u¿yciu metody IsNaN.
+
+2) Mo¿na korzystaæ z dostêpnych w bibliotece metod znajdywania najktótszych œcie¿ek.
+
+3) Mo¿e siê przydaæ odwrócenie kierunków krawêdzi (wariant 1)
+
+4) Prostym sposobem, zabronienia korzystania z jakiejœ krawêdzi jest ... usuniêcie jej z grafu (wariant 2).
+(Oczywiœcie to tylko idea, grafu nie wolno modyfikowaæ.)
+
+Oceny:
+Za ka¿dy wariant:
+ 1 pkt za znalezienie dobrej d³ugoœci œcie¿ki
+ 2 pkt za znalezienie dobrej d³ugoœci i w³aœciwej œcie¿ki
+-1 pkt za z³¹ z³o¿onoœæ obliczeniow¹

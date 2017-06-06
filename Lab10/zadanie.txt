@@ -1,0 +1,76 @@
+Backtracking
+
+Suszenie prania
+
+
+Sieć pralni posiada suszarnię. Suszarnia składa się z zamocowanych w
+ziemi wsporników i linek rozciągniętych miedzy parami wsporników. W
+programie ta suszarnia jest reprezentowana jako graf nieskierowany.
+Ze względu na ograniczoną wytrzymałość wsporników, można wieszać
+pranie na nie więcej niż jednej lince zaczepionej do
+wspornika. Podczas ostatniego, trwającego dwa dni, posiedzenia zarząd
+zdecydował o wypłaceniu premii członkom zarządu oraz o tym, żeby
+podnieść pojemność suszarni poprzez dopuszczenie użycia więcej niż
+jednej linki ze wspornika, pod warunkiem nie przekroczenia określonego
+poziomu ryzyka k.  Poziom ryzyka jest definiowany jako suma liczby
+nadmiarowych (ponad 1) końców linek będących w użyciu, zaczepionych do
+wsporników 
+
+Ściślej:
+k = suma po w∈W z max{l(w) − 1, 0}, 
+
+gdzie W – zbiór wsporników, l(w) – liczba linek zaczepiona do
+wspornika. W oczywisty sposób poziom ryzyka 0 oznacza system
+wykorzystania linek sprzed posiedzenia zarządu.
+
+Zadaniem jest napisanie programu, który pozwoli wyliczyć największą
+możliwą liczbę linek, którą można wykorzystać na raz przy poziomie
+ryzyka nie przekraczającym k.  Dodatkowo, w drugiej kolejności, sieć
+pralni preferuje wykorzystanie linek, które są mniej zużyte. Wagi
+krawędzi w grafie wejściowym oznaczają stopień zużycia każdej z
+linek. Spośród wszystkich najliczniejszych zbiorów linek należy
+zwrócić taki o minimalnej sumie wag krawędzi.  Rozwiązanie należy
+zaimplementować stosując algorytm z powrotami.
+
+
+1. [2 p.] Zwracanie największej możliwej liczności zbioru linek.
+Testy podają , że zadeklarowana liczność jest ok, lista krawędzi może
+być null.
+
+2. [1 p.] Zwracanie poprawnego zbioru linek (krawędzi) o największej
+liczności. Pierwsza grupa testów zwraca wszystko OK.
+
+3. [1 p.] Zwracanie wyniku o najmniejszej wadze. – Wszystkie testy OK.
+
+
+Uwagi
+• W ramach zadania trzeba napisać jeden wariant metody do
+  wszystkich etapów. Kolejne etapy nie mogą psuć wyników
+  poprzednich. Nie należy również robić żadnych przesadnych
+  optymalizacji we wcześniejszych etapach, jeśli spowodują one
+  komplikacje programu w etapach kolejnych.
+
+• Rozwiązania (również zwracające poprawne wyniki)
+  nieużywające backtrackingu nie będą uznane.
+
+• Algorytm powinien działać w czasie O*(2^|E|), gdzie |E| to liczność
+  zbioru krawędzi.
+
+
+Przykłady
+
+Rysunek (przyklad1.pdf) przedstawia przykładowe wykorzystanie linek
+przy poziomie ryzyka 0 i możliwości jego rozszerzenia po podniesieniu
+tego poziomu. Na zielono zaznaczone są krawędzi z przykładowego
+rozwiązania dla poziomu ryzka 0. Na czerwono zaznaczono przykład
+krawędzi, która podniesie poziom ryzyka rozwiązania do 1. Linią
+przerywaną zaznaczono krawędź, która nie może być dołączona do
+zielonego rozwiązania, gdy ograniczenie na poziom ryzyka jest 1, bo
+podbija ten poziom o 2.
+
+
+Rysunek (przyklad2.pdf) przedstawia złe (nieoptymalne) rozwiązanie dla
+poziomu ryzyka 0. Rozwiązanie zaznaczone na czerwono ma co prawda
+poziom ryzyka 0 i dodanie dowolnej krawędzi podniesie ten poziom
+ryzyka, ale nie jest to rozwiązanie optymalne. Optymalne rozwiązanie
+ma 3 krawędzi: {1, 2}, {3, 4}, {5, 6}.

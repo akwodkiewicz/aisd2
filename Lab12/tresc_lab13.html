@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="para-najblizszych-punktow-na-paszczyznie" class="section level1">
+<h1>Para najbliższych punktów na płaszczyźnie</h1>
+<p>Mamy dany zbiór punktów na płaszczyźnie dwuwymiarowej. Zadanie polega na znalezieniu pary punktów, dla których odległość między nimi jest najmniejsza.</p>
+<div id="etap-1-rozgrzewkowy-0.5p" class="section level2">
+<h2>Etap 1, rozgrzewkowy (<em>0.5p</em>)</h2>
+<p>Uzupełnij metodę <code>Distance()</code> w pliku <code>SweepClosestPair.cs</code> (zwykła odległość Euklidesowa).</p>
+<p>Uzupełnij metodę <code>FindClosestPointsBrute()</code> w pliku <code>SweepClosestPair.cs</code>. Algorytm ma działać w złożoności <span class="math inline">\(O(n^2)\)</span>, gdzie <span class="math inline">\(n\)</span> to liczba punktów w chmurze. Algorytm po prostu oblicza wszystkie możliwe odległości pomiędzy punktami i wybiera najmniejszy z nich.</p>
+<p>Aby zdobyć punkty z tego etapu, muszą przechodzić testy z grupy pierwszej.</p>
+</div>
+<div id="etap-2-wasciwy-2.5p" class="section level2">
+<h2>Etap 2, właściwy (<em>2.5p</em>)</h2>
+<p>Uzupełnij metodę <code>FindClosestPoints()</code> w pliku <code>SweepClosestPair.cs</code>. Wymaganą złożonością jest <span class="math inline">\(O(n \log n)\)</span>, gdzie <span class="math inline">\(n\)</span> to liczba punktów w chmurze.</p>
+<p>Zadanie należy rozwiązać znaną i lubianą techniką, jaką jest zamiatanie. Zamiatamy miotłą od lewej do prawej. Miotła zatrzymuje się na każdym z punktów. Podczas trwania algorytmu powinniśmy przechowywać:</p>
+<ol style="list-style-type: decimal">
+<li>parę najbliższych punktów dotychczas znalezionych,</li>
+<li>dystans <span class="math inline">\(d\)</span> pomiędzy tą parą,</li>
+<li>punkty znajdujące się od miotły w odległości co najwyżej <span class="math inline">\(d\)</span> w lewo (po <span class="math inline">\(x\)</span>-owej współrzędnej). Punkty te powinny znajdować się w strukturze posortowanego zbioru (np. drzewa) <span class="math inline">\(D\)</span>, posortowane po <span class="math inline">\(y\)</span>-owej współrzędnej.</li>
+</ol>
+<div class="figure">
+<img src="data:image/gif;base64,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" title="Dzisiejsze zadanie jest bardzo specjalne" />
+
+</div>
+<p>Podczas każdego napotkania punktu <span class="math inline">\(p\)</span> przez miotłę podczas zamiatania, należy wykonać następujące operacje:</p>
+<ol style="list-style-type: decimal">
+<li>usunąć z <span class="math inline">\(D\)</span> wszystkie punkty, które po <span class="math inline">\(x\)</span>-owej współrzędnej są w odległości większej niż <span class="math inline">\(d\)</span> od <span class="math inline">\(p\)</span> (te punkty są na lewo od <span class="math inline">\(p\)</span>)</li>
+<li>wyznaczyć najbliższy punkt na lewo od <span class="math inline">\(p\)</span> w D</li>
+<li>jeśli ten punkt jest bliżej niż dotychczasowe <span class="math inline">\(d\)</span>, uaktualnić najbliższą parę i <span class="math inline">\(d\)</span></li>
+</ol>
+<p>Największą zagwozdką w tym algorytmie jest punkt 2 (wyznaczenie najbliższego punktu na lewo od <span class="math inline">\(p\)</span>). Oczywiście należy rozważać jedynie punkty, które po <span class="math inline">\(x\)</span>-owej współrzędnej są nie dalej niż <span class="math inline">\(d\)</span> (a więc są w <span class="math inline">\(D\)</span>). Jednak to nie wszystko. Należy skorzystać z tego, że <span class="math inline">\(D\)</span> jest posortowaną strukturą drzewiastą posortowaną po <span class="math inline">\(y\)</span> współrzędnej i wybrać z niej jedynie te punkty, które znajdują się nie dalej niż <span class="math inline">\(d\)</span> we współrzędnej <span class="math inline">\(y\)</span>-owej. I dopiero od tych (i tylko od tych) punktów należy mierzyć dystans do <span class="math inline">\(p\)</span>.</p>
+<div class="figure">
+<img src="data:image/gif;base64,R0lGODdhngDKAcIAAAAAAAD//9EAAP//////AAAAAAAAAAAAACwAAAAAngDKAQAD/ji63P4wykmrvTjrzbv/YCiOZGmeaKqubOu+cCzPdG3feK7vfO//wKBwSCwaj8ikcslsOp/QqHRKrVqv2Kx2y+16v+CweEwum8/otLoiWAvbbiA87pvTefa7Lq/H8fs2f4A0goMyhYYaAIsAGoiJF4yMGY+QFZKTF5UsBJ2en6ChoqOkpaanopiMqJ4CBDessbKztKGqALKusLW8vb6eqrO6Nr/FxrGStMM1x83Ozss0z9PUtdEz1dnapdcy29/gBN0x4eXV4zDm6tCvxOvvv+gv8PS88i71+bntzPr+pvda/Bs4KiAngghb8ZOWMKHBFQ0dLsQWkeBDFRUtTvSW/vHfxRQdPW4kF1LfRxQlTY5Ml7LeyRMtXa6cFxPeSxM1bc7El3PdzRI9fe4UGNTcTxJFjQ49mBTc0RFNwz0VEdXpUohVt00NkVXrVYxds20FEVbsV5BlqY39kFbtWZRtn631EFfuW5h1m83tkFfvXZx9je3lEFjwX6CF4x1GmtjX4A2NHS+GGtneZKqVrV3mmlnZZrKdhX1mG3rfrtKsHmtAHUt1BtapR9OFfco1Btq1ZfPFzU03Yd6kbF8AHtw3ZOKihFtAntz4auaglFcIQL269evYs2vfzr279+/grS9rJCO8+fPo06sXz498jPXw48tPP2zRjPn48+uvXt89/oz9AAZIXzuZ/CfggQhu159/LiTo4IMBLFgehBQGqEsj9r1X4Yb5XTgAhhpyKCJ8HoJo4IgoolfihyGm6OJ3rpBn4gsv1ujdePfZqGN2OE6444/U9dgikDoKeSKRRbaXI5JJLsBgg0w2qcCTLUQpJYs+WumikTRq+SKXUHqZIphVijmmklmaySGZLEAIgJrYsbmCg5jAyR+aQwJ4i50R4nlkgHvaKacKCQYK56ApFKoKn4iiQKckfPbp5JKKRirplJRa6mCjJ2hKIacmeAohqCWI+iCpJJi6qZ9dqnogqiO4iiCsIsj6Kqth2rofrSHoaiGuZfqqH68gCLsrsG0a/tshsnMqix+xHzj7LLOESisftB5Yey21iWpLIreOerseth2IOy64nZo74KRpqgseuRy4qyK6ocprHrwb2HsvvaXq+y6/qfoLI8CxCnwjwbUa3B2+Gii8MMK9OqwgxMVKrB3DGVh8McXRahwnx9l6fB3GGIg8Msjlmnwnu3l6TPIFKq+MabsuoxxvzJdi2bLGL1uAc85UJhtzz9PhTDQFPx89QdI252t00w0/zfKfIistAdNTt6qy1RFgPfPOFnMNgdc6U11z1rmaLPYDZAfd7NBQZyz112bzHHfJc5ettdp3w/y0jHoLvfUrILodLtwszph21YQnDrbEJRp++OCJ/kueLuIfAmB5vZhrvnm/InsuIQSef+53dp5LW/p1pQsgo+Gllx4xdbG7G3vr7sHueeaaF3v778AHL/zwxBdv/PGi9x44A7vzbnrXAawu8O2uAx5B8813bF3t2nKP+5S6O6m89tq96azmqCcP/vXjj08+3+AHjb37IXdOv/ivF2y//LIHjDiGVMoe6ChXOAcI0H8EdFwDDqi/BCrOeZPjG+D8c7vLUY5ue2Mc2oJ1weUJDn4YXNzZQshBEHrwbR18XgNNqMKEYe6E1XphC2eXwkxpkIQfvCEMuyVDG45whxHU4Qwr1kOa2W2DOfzhEN8nRB8eEYcoZKETw9Y3n+Vt/on1q6ERqYjEKDZxi5CrYtGK+Dhjpe5fXYyht7h3sDTysHu3G5gbg3i+OLYRimq01u/kiMc36tGOD5ujBeF4xjsCcZBfLKPC1uaAtk0xjILknBYVaTBGNsCRYHSYJRmASUoKbJML6GTduNhHOj7xkJKUYiYXKUakXfGRmmzl0l65ykrK8mq09KS/QKkAUWZQibBkZSQHqEpd6ouXA/ClCE+JxZSRcZSQLCUigVnLT94Ses/8JTODacthIrCY0IylN1eYyHAKU5qpLKc2SYlKYqpzmexs5s2yCc9otvOb7yxhPpO4zWrukgATNKa9YoQpecpNelws4H8AKU6F0miP/pB0qAuAl9DMlQei4uTdRdmYUQYmC6HR9KgXR3g/fVJToPJCJnSi45zXrFQhp3mpdChgClz0RXMAaeltQBG7xvSUpbsoHW2EKg6dDgd5SE2qUpeK1KLGFKCe6wxRYeqOVOD0plEtiFGX89JOzHQCXfXqVisQVqdWVaZjpWlYvyqBsrI1Am5NK1jXKte20vWp0HkrBOKKV+bo9QF8PetK/+qAwPajq4RtgGEZgti6wvWugs2rY/cK2cOita/ISSwDFkuRxmKWOJpdAGc54tnI+nWygK0sYy9r2syitrCq7SxrLTvY1yo2tqSd7Wpr+1nghFYBoyVJaWkr2d7y5rcD/gguS4a72+K2FrS23Sxuhatb2fL2uVGZai+QG5fbKca4Qfndd7FbFPFKBrw9Me92oyvatKjXMuhN70/XG1/WcHe6y61ubq9L3NPWFzX3Za51ndtf1/63NAHWL3X521z/khc3CWbwgB1cYOgeODQRJnCDDfxg2mSYwhu2sCUIMeIabKLEJzgxikug4hWPoMUzKKkVZDwAGE9UpFno3wJsnAIdm0F2PDYBU4dM5CIvVQc+LkOSebDkLTRZCDSmQpRdTOUqW/nKWAbBk7P8gdhxGQVT/jIHcCzmDpC5zBjo3ZnRfAkvs9kDylvzm9mHvzlvIHthtvMD5mdQMbcvz3pmJl6cAR1oQXu5z1yWnZwLzehGO/rRkI60pCdN6Upb+tKYzrSmPZAAADs=" title="Dzisiejsze zadanie jest bardzo specjalne 2" />
+
+</div>
+<p>Parę słów na temat złożoności: najciekawszym elementem w tym algorytmie jest moment, gdy dla danego punktu porównujemy się z punktami zawartymi w prostokącie <span class="math inline">\(d \times 2d\)</span>. Może się wydawać, że w takim prostokącie może być zawartych bardzo wiele punktów, w pesymistycznym przypadku rzędu <span class="math inline">\(O(n)\)</span>. Gdyby tak było istotnie, algorytm oczywiście nie miałby złożoności <span class="math inline">\(O(n \log n)\)</span>, ale gorszą (<span class="math inline">\(O(n^2)\)</span>). Da się jednak pokazać, że w takim prostokącie zawsze, nawet w pesymistycznym przypadku, będzie maksymalnie pewna stała liczba punktów, zależna od przestrzeni, w której działamy (ale nie od liczby punktów, jaką liczy sobie nasza chmura). Jest ona rzędu 6 punktów dla przestrzeni Euklidesowej, choć w praktyce nie pojawia się więcej niż 1-3 punkty. Dlatego pętlę po punktach w prostokącie potraktuj jako operację stałą, gdy będziesz obliczał złożoność obliczeniową swojego algorytmu.</p>
+<p>Aby otrzymać punkty za ten etap, muszą przechodzić testy z grupy drugiej, przy czym ocenianie nie jest binarne: można postawić częściową liczbę punktów za ten etap w przypadku częściowego rozwiązania (decyduje prowadzący).</p>
+</div>
+<div id="etap-3-wydajnosciowy-1.0p" class="section level2">
+<h2>Etap 3, wydajnościowy (<em>1.0p</em>)</h2>
+<p>Tutaj nadal testowana jest metoda <code>FindClosestPoints()</code>. Nie trzeba wprowadzać żadnych modyfikacji. Aby zdobyć punkty z tego etapu, muszą przechodzić testy z grupy trzeciej (testy z timeoutami). Poza tym powinny przechodzić wszystkie testy z grupy drugiej.</p>
+</div>
+<div id="uwagi" class="section level2">
+<h2>Uwagi</h2>
+<ul>
+<li>Możemy założyć, że zawsze w chmurze będą przynajmniej dwa punkty</li>
+<li>W C# klasą, która może posłużyć za <span class="math inline">\(D\)</span>, jest <code>SortedSet</code>. Aby posortować punkty po <span class="math inline">\(y\)</span>-owej współrzędnej, należy wykorzystać odpowiedni komparator. Podczas samej implementacji i wyboru punktów z odpowiedniego przedziału należy użyć metody <code>GetViewBetween()</code> w tej klasie. Klasa <code>SortedSet</code> znajduje się w:</li>
+</ul>
+<pre><code>Namespace:   System.Collections.Generic
+Assembly:  System (in System.dll)</code></pre>
+<ul>
+<li>W podanej chmurze punktów nie ma duplikatów. Wszystkie punkty są unikatowe</li>
+<li>Wykorzystaj strukturę <code>Point</code> do przechowywania punktów i obliczania odległości między punktami</li>
+<li>Wykorzystaj metodę <code>Distance()</code> ze struktury <code>Point</code>, aby liczyć dystans. Sam napiszesz tę metodę</li>
+<li>Kolejność zwracanych punktów (który jest pierwszy,a który drugi) nie ma znaczenia</li>
+<li>Inne sposoby rozwiązania zadania, które nie będą wykorzystywać metody zamiatania, <strong>nawet jeśli będą miały odpowiednią złożoność</strong>, nie będą uznawane</li>
+</ul>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

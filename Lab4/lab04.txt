@@ -1,0 +1,87 @@
+
+Zadanie ma być rozwiązane techniką programowania dynamicznego.
+
+###################################
+Wstęp:
+
+Mateusz niedawno zdał test na prawo jazdy. Jego rodzice, wiedząc jak brawurowo potrafi jeździć ich syn,
+obiecali pożyczać mu auto pod warunkiem, że będzie stosował się do ograniczeń prędkości.
+W tym celu tata Mateusza zainstalował specjalne urządzenie służace do pomiarów zmian prędkości auta,
+dokonujące pomiaru w stałych interwałach czasowych.
+Niestety nie doczytał on instrukcji i zapomniał o kalibracji urządzenia które fabrycznie mierzy
+wartość bezwględną zmian prędkości (czyli pomiar można wyrazić wzorem: abs(v_początkowe - v_końcowe)).
+
+!!! Przykładowo: Jeśli w trakcie trwania pomiaru samochód jadąc do przodu z prędkością 50km/h zwolnił
+do prędkości 40km/h urządzenie zarejestruje wartość 10.
+!!! Uwaga: Samochód jadąc do tyłu porusza się z prędkościami ujemnymi, czyli jeżeli w zadanym interwale czasowym
+auto zmieniło prędkość z 25km/h do -5km/h to urządzenie dokona pomiaru równego 30.
+
+###################################
+Zadanie 1:
+
+Niestety, niedługo potem Mateusz miał wypadek...
+Twoim zadaniem jest napisanie programu który dla określonej liczby pomiarów będzie w stanie podać
+minimalną i maksymalną prędkość (bezwzględną) z jaką mógł jechać Mateusz w momencie zderzenia.
+Oprócz tego należy zwrócić tablicę bool'i zawierającą informację które z pomiarów oznaczały, że samochód hamował (true)
+a które, że samochów przyspieszał (false).
+
+Przykładowy pomiar: [ 10, 9, 3 ] powinien dawać wynik: 2 (dla minimalnej prędkości) oraz 21 (dla maksymalnej).
+W przykładzie samochód mógł początkowo jechać z prędkością 10km/h, następnie zwolnić o 9km/h do prędkości 1km/h
+a na końcu ("zwalniając" o 3km/h) zacząć jechać do tyłu z prędkością 2km/h.
+Drugi sposób interpretacji tablicy pomiarów to założenie, że samochód rozpoczynał jazdę cofając się
+z prędkością 10km/h a następnie w trakcie kolejnych dwóch pomiarów przyspieszał do przodu kolejno o 9km/h
+i 3km/h ostatecznie jadąc do przodu z prędkością 2km/h.
+
+!!! Podpowiedź: 
+Innymi słowy zadanie polega na stwierdzeniu, jaką maksymalną, a jaką minimalną prędkość można uzyskać
+poprzez ustalenie dla każdego pomiaru przyspieszenia lub hamowania, oraz zwrócenia tych informacji w tablicy
+(tablica oczywiście dotyczy sekwencji pomiarów prowadzących do prędkości minimalnej).
+
+Uzyskanie maksymalnej możliwej prędkości jest łatwe.
+Uzyskanie minimalnej wymaga znalezienia podziału zbioru zmian na zbiór hamowań i przyspieszeń,
+tak aby ich sumy były możliwie równe. 
+
+###################################
+Zadanie 2:
+
+Napisz nową metodę która w przeciwieństwie do poprzedniej wyznaczy minimalną i maksymalną wartość prędkości
+z jaką mogło poruszać się auto w dowolnym momencie podróży.
+Tablica z Zadania 1 informująca o sposobie interpretacji danego pomiaru powinna zostać ustawiona na null.
+
+Przykładowy pomiar: [ 10, 9, 3 ] powinien dawać wynik: 1 (dla minimalnej prędkości) oraz 21 (dla maksymalnej).
+Wyjaśnienie: Możliwa minimalna prędkość osiągana jest podczas drugiego pomiaru kiedy to z 10km/h
+auto zwalnia o 9km/h do prędkości 1km/h.
+Czyli tak jak w Zadaniu 1 mamy sytuację w której auto startuje z prędkością 10km/h (jadąc do przodu lub do tyłu)
+a następnie zmienia prędkość o 9km/h w kierunku przeciwnym do pierwotnego, tym samym redukując ją do 1km/h.
+Jest to moment w którym osiągnięte zostaje minimum na całej zarejestrowanej trasie bowiem kolejny pomiar
+informuje o zmianie dotychczasowej prędkości o 3km/h. Nie jest więc ważne czy ostatnia zmiana prędkości
+odbyła się zgodnie z dotychczasowym kierunkiem poruszania czy nie, gdyż w obu sytuacjach finalna prędkość
+będzie większa niż ta zarejestrowana po drugim pomiarze (byłoby to 2km/h w przypadku zmiany kierunku jazdy
+lub 4km/h w przypadku przeciwnym).
+
+
+###################################
+!!! Dodatkowe informacje:
+Zadanie ma być rozwiązane techniką programowania dynamicznego.
+Złożoność pamięciowa algorytmu powinna być nie większa niż O(sumy_wartości_pomiarów).
+Złożoność czasowa algorytmu powinna być nie większa niż O(liczby_pomiarów * sumy_wartości_pomiarów).
+Można założyć, że wejściowa tablica z pomiarami nie jest pusta oraz, że zawiera tylko nieujemne wartości.
+Należy również założyć, że auto w trakcie trwania pomiaru mogło tylko wytracać prędkość albo ją zyskiwać
+(czyli w każdym interwale czasowym prędkość auta zmieniała się w sposób monotoniczny).
+Zadanie 2 powinno zawierać warunek sprawdzający możliwość wcześniejszego zakończenia obliczeń w momencie gdy 
+na danym etapie osiągnięta została najniższa z możliwych prędkości minimalnych.
+
+###################################
+Punktacja (maksymalnie 4 punkty):
+
+Zadanie 1 -  3.0 pkt
+2.0 pkt. - wartość zwracana
+1.0 pkt. - tablica hamowań/przyspieszeń
+kara  -0.5 pkt. za złą złożoność pamięciową lub czasową
+
+Zadanie 2 -  1.0 pkt
+1.0 pkt. - wartość zwracana
+kara  -0.5 pkt. za złą złożoność pamięciową lub czasową lub brak warunku obcinającego zbędne obliczenia
+
+Uwaga: W testach domowych przykłady testowe będą znacznie większe i zła złożoność może powodować
+przerwanie obliczeń (timeout lub out of memory), a to już jest poważniejszy błąd.

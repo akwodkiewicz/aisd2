@@ -1,0 +1,70 @@
+Peptyd (czyli takie ma³e bia³ko) jest ci¹giem aminokwasów,
+oznaczanych zwykle literami A,C,D,E,F,G,H,I,K,L,M,N,P,Q,R,S,T,V,W,Y.
+Chcemy zbadaæ, na ile podobne s¹ dwa peptydy (np. mog¹ wchodziæ w sk³ad odmian tego samego bia³ka
+u ró¿nych gatunków organizmów). 
+
+Naszym celem jest znalezienie dopasowania dwóch peptydów o najwy¿szej ocenie.
+Elementarne operacje, które mo¿na wykonywaæ na peptydach to: wstawienie elementu, usuniêcie elementu,
+zamiana elementu na inny.
+
+W najprostszym wariancie ocena podobieñstwa wynika bezpoœrednio z liczby operacji,
+które nale¿y wykonaæ, by zamieniæ jeden ci¹g w drugi.
+Ka¿de wstawienie, usuniêcie i zamiana obni¿a ocenê o 1.
+Jeœli dopasowane elementy s¹ równe, nie zmieniaj¹ one oceny.
+
+Na przyk³ad najlepsze dopasowanie ci¹gów AAACAC i CACA to:
+AAACAC
+CA-CA-
+i jego ocena to -1 (zamiana A na C) -1 (usuniêcie A) -1 (usuniêcie C) = -3
+
+Czêœæ 1. znalezienie optymalnej oceny dopasowania dla ci¹gów (1 pkt)
+(sprawdza to grupa Testy 1, tylko score)
+
+W praktyce okazuje siê, ¿e ró¿ne aminokwasy mutuj¹ w inne z ró¿nym prawdopodobieñstwem.
+Do oceny tych prawdopodobieñstw stosuje siê tzw. macierze podobieñstwa.
+Jedn¹ z najbardziej znanych macierzy podobieñstwa jest PAM250.
+Liczba le¿¹ca w odpowiednim wierszu i kolumnie mówi, jak dana zamiana (lub jej brak) wp³ywa na ocenê dopasowania.
+W naszym programie dostarczona jest klasa ScoringMatrix, do której elementów odwo³ujemy siê
+za pomoc¹ odpowiednich znaków, na przyk³ad:
+ScoringMatrix m = ... // inicjalizacja
+m['A']['D'] <- koszt zamiany A na D.
+
+Liczby dodatnie oznaczaj¹, ¿e dana para podnosi ocenê, liczby ujemne obni¿aj¹ ocenê.
+Dodatkowo, wstawienie lub usuniêcie aminokwasu (tzw. indel) ma wagê epsilon (domyœlnie -1).
+Celem jest znalezienie dopasowania o maksymalnej ocenie.
+
+Czêœæ 2. znalezienie optymalnej oceny dopasowania z wagami (0.5 pkt)
+(Testy 2, tylko score)
+
+Czêœæ 3. znalezienie najlepszego dopasowania (1 pkt)
+(operacje usuniêcia/wstawienia powinny byæ oznaczone znakiem '-' w odpowiednim miejscu).
+(Testy 1 i 2, alignment)
+
+W ostatnim wariancie interesuje nas znalezienie optymalnego dopasowania pewnego spójnego podci¹gu v
+do pewnego spójnego podci¹gu w.
+Formalnie, szukamy spójnego podci¹gu v' ci¹gu v oraz spójnego podci¹gu w' ci¹gu w,
+dla których wartoœæ dopasowania jest najwiêksza.
+Na przyk³ad jeœli v = AAAXYXX, a w = XXXBBB, najlepszym dopasowaniem bêdzie:
+v'=XYXX
+w'=X-XX,
+zaœ pozosta³e elementy v i w s¹ ignorowane.
+
+Czêœæ 4. znalezienie optymalnej oceny dopasowania podci¹gów (1 pkt)
+(Testy 3, score OK)
+
+Czêœæ 5. znalezienie najlepszego dopasowania (0.5 pkt)
+(Testy 3, alignment OK)
+
+Podpowiedzi i uwagi:
+* wykorzystaj programowanie dynamiczne podobne jak przy problemie znajdowania najd³u¿szego wspólnego podci¹gu
+* z³o¿onoœæ obliczeniowa rozwi¹zania wynosi O(n^2), gdzie n jest d³ugoœci¹ d³u¿szego ci¹gu wejœciowego
+* naiwne podejœcie do punktu 4 da nam z³o¿onoœæ O(n^4), a mo¿e i O(n^6), ale oczekiwana z³o¿onoœæ to nadal O(n^2)
+* w czêœci 4 i 5 rozwa¿ dodatkow¹ operacjê "przeskoczenia" od pocz¹tku do danego indeksu w ci¹gu.
+Przeskok taki jest darmowy.
+
+Ocenianie:
+Testy 1: score OK -- 1 pkt
+Testy 2: score OK -- 0.5 pkt
+Testy 1 & 2: score OK, alignment OK -- 1 pkt
+Testy 3: score OK -- 1 pkt
+Testy 3: alignment OK -- 0.5 pkt

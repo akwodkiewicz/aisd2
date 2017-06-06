@@ -1,0 +1,34 @@
+ 
+Uzupe³niæ definicje klas SimpleList i MoveToFrontList.
+
+Obie klasy s¹ implementacjami struktury danych s³ownika, za pomoc¹ list wi¹zanych
+(ka¿dy element listy jest oddzielnym obiektem ze wskaŸnikiem do nastêpnego).
+S³ownik to struktura danych umo¿liwiaj¹ca operacje:
+- dodawania (Add) - jeœli element ju¿ jest w s³owniku to nie dodajemy.
+- usuwania (Remove)
+- wyszukiwania (Search)
+Dodatkowo wymienione klasy musz¹ umo¿liwiaæ przegl¹danie elementów listy za pomoc¹
+instrukcji foreach (ta operacja nie mo¿e modyfikowaæ listy).
+
+SimpleList to zwyk³a lista z dodawaniem elementów na koñcu.
+
+MoveToFrontList to samoorganizuj¹ca siê lista z przenoszeniem elementu,
+do którego by³ dostêp na pocz¹tek listy (dodawanie równie¿ na pocz¹tku).
+
+Dok³adniejszy opis poszczególnych operacji znajduje siê w komentarzach w pliku Lists.cs.
+
+Punktacja
+
+1) klasa SimpleList
+- wyl¹cznie dodawanie              -  0.5 pkt
+- dwie operacje (w tym dodawanie)  -  1.0 pkt.
+- wszystkie operacje               -  1.5 pkt.
+
+2) klasa MoveToFrontList
+- wyl¹cznie dodawanie              -  1.0 pkt
+- dwie operacje (w tym dodawanie)  -  2.0 pkt.
+- wszystkie operacje               -  2.5 pkt.
+
+Obs³uga foreach Jest obowi¹zkowa (bez tego nie bêd¹ dzia³a³y testy),
+ale nie ma za to ¿adnych punktów.
+
